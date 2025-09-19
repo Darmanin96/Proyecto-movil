@@ -21,14 +21,23 @@ function getAllTecnicos(codTecnico) {
     });
 }
 
-function enviar(codTecnico, nombreTecnico, importe, fecha, alimento, ticket) {
+function enviar(codTecnico, nombreTecnico, importe, delegacion, fecha, alimento, ticket) {
+    console.log(codTecnico);
+    console.log(nombreTecnico);
+    console.log(importe);
+    console.log(fecha);
+    console.log(alimento);
+    console.log(ticket);
+    console.log(delegacion);
     const formData = new FormData();
-    formData.append("codTecnico", codTecnico);
+      formData.append("codigoEmpleado", codTecnico); 
     formData.append("nombreTecnico", nombreTecnico);
+    formData.append("delegacion", delegacion);    
     formData.append("importe", importe);
     formData.append("fecha", fecha);
     formData.append("imagenAlimento", alimento);
     formData.append("imagenTicket", ticket);
+
 
     $.ajax({
         url: "http://localhost/Api-Tecnicos/index.php",

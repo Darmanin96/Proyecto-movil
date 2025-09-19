@@ -9,6 +9,7 @@ const imagenIniciarSesion = document.getElementsByClassName("sesion");
 const mensajeP = document.getElementById("mensajeTecnico");
 const codTecnico = localStorage.getItem("codTecnico");
 const nombreTecnico = localStorage.getItem("nombreTecnico");
+const delegacion = document.getElementById("areageografica");
 
 
 
@@ -76,51 +77,65 @@ function fotoTicket(){
     }
 }
 
-function comprobar(e){
 
+function comprobar(e) {
     e.preventDefault();
 
-    let errores= [];
+    let errores = [];
 
     if (!importe.value || parseFloat(importe.value) <= 0) {
         errores.push("El importe es obligatorio y debe ser mayor que 0.");
     }
 
-    
     if (!inputFecha.value) {
         errores.push("La fecha es obligatoria.");
     }
-
 
     const codTecnico = localStorage.getItem("codTecnico");
     if (!codTecnico) {
         errores.push("Debes iniciar sesión con un código de técnico.");
     }
 
-
     if (!alimento.files || alimento.files.length === 0) {
         errores.push("Debes subir una foto del alimento.");
     }
-
 
     if (!ticket.files || ticket.files.length === 0) {
         errores.push("Debes subir una foto del ticket.");
     }
 
-    if(errores.length > 0){
-        alert("Error: " + errores.join("\n"));
-    }else{
+    if (errores.length > 0) {
+        alert("Error:\n" + errores.join("\n"));
+        return; 
+    }
+
+    const confirmar = confirm("¿Quieres enviar estos datos?");
+    if (confirmar) {
         enviar(
             codTecnico,
             nombreTecnico,
             importe.value,
+            delegacion.value,
             inputFecha.value,
             alimento.files[0],
             ticket.files[0]
         );
-
+        limpiar();
+        setHorayFecha();
+    } else {
+        console.log("El usuario canceló el envío");
+        return; 
     }
+}
 
+
+function limpiar() {
+    importe.value = "";
+    inputFecha.value = "";
+    alimento.value = "";
+    ticket.value = "";
+    previewAlimento.innerHTML = "";
+    previewTicket.innerHTML = "";
 }
 
 
