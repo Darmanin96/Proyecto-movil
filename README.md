@@ -2,7 +2,7 @@
 
 Con este proyecto, los técnicos podrán tomar fotos de sus tickets y de los alimentos a la hora de comer.  
 <br>
-<div style="text-align:center;">
+<div style="text-align:left;">
   <img width="493" height="826" alt="image" src="https://github.com/user-attachments/assets/2b0caa8b-1a3a-4bc6-9620-9d1e390ef3f7" />
 </div>
 <br>
