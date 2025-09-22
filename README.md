@@ -55,3 +55,6 @@ Finalmente, solo es necesario pulsar el botón **Enviar** para que todos los dat
   <img width="372" height="822" alt="image" src="https://github.com/user-attachments/assets/79ced5a9-83b4-4e60-b847-b1c3bc746bc6" />
 </div>
 <br>
+
+<img src="URL_DE_LA_IMAGEN" style="display:block; margin-left:auto; margin-right:auto;" />
+
