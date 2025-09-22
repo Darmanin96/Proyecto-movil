@@ -12,21 +12,17 @@ const nombreTecnico = localStorage.getItem("nombreTecnico");
 const delegacion = document.getElementById("areageografica");
 
 
-
 function setHorayFecha() {
-    
     if(inputFecha){
         const date = new Date();
-        const año   = date.getFullYear();
-        const mes   = String(date.getMonth() + 1).padStart(2, "0");
-        const dia   = String(date.getDate()).padStart(2, "0");
-        const hora  = String(date.getHours()).padStart(2, "0");
-        const min   = String(date.getMinutes()).padStart(2, "0");
-
+        const año  = date.getFullYear();
+        const mes  = String(date.getMonth() + 1).padStart(2, "0");
+        const dia  = String(date.getDate()).padStart(2, "0");
+        const hora = String(date.getHours()).padStart(2, "0");
+        const min  = String(date.getMinutes()).padStart(2, "0");
         inputFecha.value = `${año}-${mes}-${dia}T${hora}:${min}`;
     }
 }
-
 
 function fotoAlimento() {
     if (alimento) {
@@ -39,32 +35,40 @@ function fotoAlimento() {
     }
 }
 
-
 function iniciarSesion() {
-    const codTecnico = prompt("Introducir código del técnico");
-    if (codTecnico) {
-        localStorage.setItem("codTecnico", codTecnico);
-        getAllTecnicos(codTecnico); 
-    } else {
-        alert("No se introdujo ningún código");
+  Swal.fire({
+    title: 'Iniciar sesión',
+    text: 'Introduce el código del técnico',
+    input: 'text',
+    inputPlaceholder: 'Código del técnico',
+    showCancelButton: true,
+    confirmButtonText: 'Ingresar',
+    cancelButtonText: 'Cancelar',
+    inputValidator: (value) => {
+      if (!value) {
+        return 'Debes ingresar un código válido';
+      }
+      return null; 
+    },
+    allowOutsideClick: false
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const codTecnico = result.value.trim();
+      localStorage.setItem("codTecnico", codTecnico);
+      getAllTecnicos(codTecnico);
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      toastr.warning("Inicio de sesión cancelado");
     }
+  });
 }
 
 
-
 function cambiarTectoTecnico(tecnicoEncontrado){
-    
     if (tecnicoEncontrado && tecnicoEncontrado.codTecnico) {
         mensajeP.textContent = tecnicoEncontrado.codTecnico;
         mensajeP.style.display = "inline";
     } 
 }
-
-
-
-
-
-
 
 function fotoTicket(){
     if (ticket) {
@@ -76,7 +80,6 @@ function fotoTicket(){
         });
     }
 }
-
 
 function comprobar(e) {
     e.preventDefault();
@@ -105,7 +108,21 @@ function comprobar(e) {
     }
 
     if (errores.length > 0) {
-        alert("Error:\n" + errores.join("\n"));
+       Swal.fire({
+        icon: 'error',
+        title: '¡Ups! Se encontraron errores',
+        html: `
+            <p class="swal-texto">Por favor revisa los siguientes puntos antes de continuar:</p>
+            <ul class="swal-lista">
+            ${errores.map(err => `<li>${err}</li>`).join('')}
+            </ul>
+        `,
+        confirmButtonText: 'Entendido',
+        customClass: {
+            popup: 'swal-popup',
+            confirmButton: 'swal-btn-confirm'
+        }
+        });
         return; 
     }
 
@@ -117,8 +134,8 @@ function comprobar(e) {
             importe.value,
             delegacion.value,
             inputFecha.value,
-            alimento.files[0],
-            ticket.files[0]
+            alimento.files[0], 
+            ticket.files[0]    
         );
         limpiar();
         setHorayFecha();
@@ -137,7 +154,6 @@ function limpiar() {
     previewAlimento.innerHTML = "";
     previewTicket.innerHTML = "";
 }
-
 
 
 window.addEventListener("DOMContentLoaded", () => {

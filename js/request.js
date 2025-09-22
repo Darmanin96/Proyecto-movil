@@ -5,14 +5,13 @@ function getAllTecnicos(codTecnico) {
         dataType: "json",
         success: function(datos) {
             const tecnicoEncontrado = datos.data.find(tecnico => tecnico.codTecnico === codTecnico);
-
             if (tecnicoEncontrado) {
                 console.log("Código correcto, técnico encontrado:", tecnicoEncontrado);
                 localStorage.setItem("nombreTecnico", tecnicoEncontrado.nombreCompleto);
                 localStorage.setItem("codTecnico", tecnicoEncontrado.codTecnico);
                 cambiarTectoTecnico(tecnicoEncontrado);
             } else {
-                 alert("Código incorrecto");
+                alert("Código incorrecto");
             }
         },
         error: function(xhr, status, error) {
@@ -29,15 +28,15 @@ function enviar(codTecnico, nombreTecnico, importe, delegacion, fecha, alimento,
     console.log(alimento);
     console.log(ticket);
     console.log(delegacion);
+
     const formData = new FormData();
-      formData.append("codigoEmpleado", codTecnico); 
+    formData.append("codigoEmpleado", codTecnico); 
     formData.append("nombreTecnico", nombreTecnico);
-    formData.append("delegacion", delegacion);    
+    formData.append("delegacion", delegacion);      
     formData.append("importe", importe);
     formData.append("fecha", fecha);
     formData.append("imagenAlimento", alimento);
     formData.append("imagenTicket", ticket);
-
 
     $.ajax({
         url: "http://localhost/Api-Tecnicos/index.php",
@@ -46,16 +45,15 @@ function enviar(codTecnico, nombreTecnico, importe, delegacion, fecha, alimento,
         processData: false,
         contentType: false,
         success: function (response) {
-            console.log("Respuesta del servidor:", response);
-            alert("Datos enviados correctamente");
+            if (response.status === "success") {
+                alert("Datos enviados correctamente");
+            } else {
+                alert("Error: " + response.message);
+            }
         },
         error: function (xhr, status, error) {
-            console.error("Error en la solicitud:", status, error);
+            console.error("error", status, error);
             alert("Error al enviar los datos");
         }
     });
 }
-
-
-
-

@@ -179,6 +179,36 @@ input:focus, select:focus {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Personaliza el contenedor principal */
+.swal-popup {
+  width: 400px;
+  background: #fff;
+}
+
+/* Párrafo de texto */
+.swal-texto {
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: #444;
+  text-align: center;
+}
+
+/* Lista de errores */
+.swal-lista {
+  text-align: left;
+  list-style-type: disc;
+  margin: 0 0 0 20px;
+  padding: 0;
+  color: #d32f2f;
+}
+
+/* Botón de confirmación */
+.swal-btn-confirm {
+  background-color: #e53935 !important;
+  color: #fff !important;
+}
+
+
 @media (max-width: 600px) {
     .container {
         padding: 20px;
