@@ -11,7 +11,11 @@ function getAllTecnicos(codTecnico) {
                 localStorage.setItem("codTecnico", tecnicoEncontrado.codTecnico);
                 cambiarTectoTecnico(tecnicoEncontrado);
             } else {
-                alert("Código incorrecto");
+                Swal.fire({
+                    icon: "error",
+                    title: "Código incorrecto",
+                    text: "El código ingresado es incorrecto"
+                });
             }
         },
         error: function(xhr, status, error) {
@@ -46,7 +50,11 @@ function enviar(codTecnico, nombreTecnico, importe, delegacion, fecha, alimento,
         contentType: false,
         success: function (response) {
             if (response.status === "success") {
-                alert("Datos enviados correctamente");
+                  Swal.fire({
+                    icon: "success",
+                    title: "Éxito",
+                    text: "Se han ingresado los datos correctamente"
+                });
             } else {
                 alert("Error: " + response.message);
             }

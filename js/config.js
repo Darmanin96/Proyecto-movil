@@ -126,23 +126,33 @@ function comprobar(e) {
         return; 
     }
 
-    const confirmar = confirm("¿Quieres enviar estos datos?");
-    if (confirmar) {
-        enviar(
-            codTecnico,
-            nombreTecnico,
-            importe.value,
-            delegacion.value,
-            inputFecha.value,
-            alimento.files[0], 
-            ticket.files[0]    
-        );
-        limpiar();
-        setHorayFecha();
-    } else {
-        console.log("El usuario canceló el envío");
-        return; 
-    }
+     Swal.fire({
+        title: '¿Quieres enviar estos datos?',
+        text: 'Se guardarán en la base de datos.',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, enviar',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            enviar(
+                codTecnico,
+                nombreTecnico,
+                importe.value,
+                delegacion.value,
+                inputFecha.value,
+                alimento.files[0],
+                ticket.files[0]
+            );
+            limpiar();
+            setHorayFecha();
+        } else if (result.isDismissed) {
+            console.log("El usuario canceló el envío");
+            return;
+        }
+    });
 }
 
 
