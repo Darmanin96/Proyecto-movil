@@ -1,6 +1,6 @@
 function getAllTecnicos(codTecnico) {
     $.ajax({
-        url: "http://localhost/Api-Tecnicos/index.php",
+        url: "http://localhost/Api-Tecnicos/tecnicos.php",
         type: "GET",
         dataType: "json",
         success: function(datos) {
@@ -43,7 +43,7 @@ function enviar(codTecnico, nombreTecnico, importe, delegacion, fecha, alimento,
     formData.append("imagenTicket", ticket);
 
     $.ajax({
-        url: "http://localhost/Api-Tecnicos/index.php",
+        url: "http://localhost/Api-Tecnicos/tecnicos.php",
         type: "POST",
         data: formData,
         processData: false,
