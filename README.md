@@ -85,9 +85,3 @@ Al confirmar, recibirás un mensaje indicando que los datos se han ingresado cor
 </p>
 
 ---
-
-## 📊 Integración
-
-Los datos registrados a través de esta aplicación son consumidos y gestionados por el proyecto de administración web:
-
-* **TecnicosTabla:** *(añade aquí el enlace al repositorio)*
